@@ -1,0 +1,691 @@
+<App Name="QuickNote" Version="1400" CultureCode="en" Label="[NotesLabel]" Description="[NotesDescriptionLabel]" Menu="NotesMainMenu" ParentMenuNode="kahua_Core.kahua_MainMenu" PermissionMode="Ignore" IsConfigurable="True" AppScope="Partition" VersionLabel="1.0">
+  <!--
+		___________________________APP
+		REFERENCES_______________________________
+	-->
+  <!--
+    AppHostTypes are used to specify which apphosts can request this application.  App hosts must be registered with Kahua before they can be used in an application.  During authentication you must supply an app host.
+  -->
+  <AppHostTypes>
+    <AppHostType>Kahua.Silverlight</AppHostType>
+    <AppHostType>Kahua.Mobile</AppHostType>
+  </AppHostTypes>
+  <!--
+		___________________________ACTIONS______________________________________
+    
+    Actions are a UI concept.  Actions are what allow things to happen within an application.  Actions contain the following properties:
+    
+    TargetType: View / DataSource / Control / Etc
+    Target: Name of the existing object that is of target type 
+    Operation: What to do
+    Scope: Workspace / View
+    Parameters: Name/Value list.  Some parameter values may be dynamic and are replaced at runtime with real values.
+        
+	-->
+  <Actions>
+    <Action Name="QuickNoteCreateAction" Scope="App" TargetType="View" Operation="Open" Target="QuickNote.QuickNoteEditView" Parameters="Region=Detail;" />
+    <Action Name="QuickNoteSaveAction" Scope="View" TargetType="DataSource" Operation="Save" Target="QuickNote.QuickNoteData" />
+    <Action Name="QuickNoteCloseEditViewAction" Scope="App" TargetType="View" Operation="Close" Target="QuickNote.QuickNoteEditView" />
+    <Action Name="QuickNoteListViewRefreshAction" Scope="App" TargetType="DataSource" Operation="Refresh" Target="QuickNote.QuickNoteListData" />
+    <Action Name="QuickNotePreviewSelect" Scope="App" TargetType="View" Operation="Open" Target="PlatformSelect" Parameters="EntityView=QuickNote.Preview;Region=Detail;EntityId={Source.Key.Id};EntityPartitionId={Source.Key.PartitionId};EntityDefName={Source.EntityDef}" />
+    <Action Name="QuickNoteDeleteAction" Scope="App" TargetType="DataSource" Operation="Delete" Target="QuickNote.QuickNoteData" Parameters="EntityId={Source.Key.Id};PartitionId={Source.Key.PartitionId};EntityDefName={Source.EntityDef}">
+      <Confirmation Caption="Delete" Detail="Are you sure you want to move this item to the recycle bin?" />
+    </Action>
+    <Action Name="QuickNoteClosePreviewAction" Scope="App" TargetType="View" Operation="Close" Target="QuickNote.QuickNotePreview" />
+    <Action Name="QuickNoteEditSelect" Scope="App" TargetType="View" Operation="Open" Target="PlatformSelect" Parameters="EntityView=QuickNote.Edit;Region=Detail;EntityId={Source.Key.Id};EntityPartitionId={Source.Key.PartitionId};EntityDefName={Source.EntityDef}" />
+    <Action Name="QuickNoteAddAttachmentsAction" TargetType="Control" Operation="ExecuteCommand" Target="QuickNote.QuickNoteAttachmentsUploader" Parameters="Command=AddFiles" />
+    <Action Name="QuickNoteEditAddAttachmentsAction" TargetType="Control" Operation="ExecuteCommand" Target="QuickNote.QuickNoteEditAttachmentsUploader" Parameters="Command=AddFiles" />
+  </Actions>
+  <!--
+		___________________________CULTURES_________________________________
+    
+    Cultures contains the culture dictionary for the application.
+    
+	-->
+  <Cultures ImportCultures="kahua_Core">
+    <Culture Code="en">
+      <Labels>
+        <Label Key="AttributePackageNumberLabel">Package Number</Label>
+        <Label Key="QuickNotePreviewLabel">Quick Note Details</Label>
+        <Label Key="NoteAttachmentsLabel">Note Attachments</Label>
+        <Label Key="NoteAttachmentsDescription">Note Attachments</Label>
+        <Label Key="EntityDefQuickNoteLabel">Note Item</Label>
+        <Label Key="EntityDefQuickNoteDescription">Note Item</Label>
+        <Label Key="AttributeItemNumberDescription">Item Number</Label>
+        <Label Key="AttributeNumberLabel">Number</Label>
+        <Label Key="NotesLabel">Notes</Label>
+        <Label Key="NotesDescriptionLabel">Droid Note Application</Label>
+        <Label Key="NoteMainMenuCreateItemLabel">Create</Label>
+        <Label Key="NoteMainMenuViewLogItemLabel">View Log</Label>
+        <Label Key="NoteLabel">Note:</Label>
+        <Label Key="NoteNameLabel">Note</Label>
+        <Label Key="NotesNameLabel">Note</Label>
+        <Label Key="RefreshLabel">Refresh</Label>
+        <Label Key="ViewLogLabel">View Log</Label>
+        <Label Key="ProjectLabel">Project:</Label>
+        <Label Key="NoLabel">No:</Label>
+        <Label Key="StatusLabel">Status:</Label>
+        <Label Key="CreatedByLabel">Created by:</Label>
+        <Label Key="LocationNameLabel">Location</Label>
+        <Label Key="LocationLabel">Location:</Label>
+        <Label Key="AssetNameLabel">Asset</Label>
+        <Label Key="CSICodeNameLabel">CSI Code</Label>
+        <Label Key="DescriptionLabel">Description:</Label>
+        <Label Key="CommentsLabel">Comments:</Label>
+        <Label Key="CompletedLabel">Completed:</Label>
+        <Label Key="ApprovedLabel">Approved:</Label>
+        <Label Key="PhotosLabel">Photos:</Label>
+        <Label Key="ActionCameraLabel">Camera</Label>
+        <Label Key="ActionSaveCloseLabel">Save/Close</Label>
+        <Label Key="ActionCloseLabel">Close</Label>
+        <Label Key="ActionSaveLabel">Save</Label>
+        <Label Key="ActionSaveSlashNewLabel">Save/New</Label>
+        <Label Key="ActionOpenCloseScreenLabel">Close Item</Label>
+        <Label Key="AddPhotoLabel">Add Photo</Label>
+        <Label Key="QuickNoteCreateLabel">Create Note</Label>
+        <Label Key="QuickNoteEditLabel">Edit Note</Label>
+        <Label Key="QuickNoteViewLabel">View Item</Label>
+        <Label Key="QuickNoteCloseLabel">Close Item</Label>
+        <Label Key="QuickNoteListViewLabel">Log View</Label>
+        <Label Key="NotesWorkspaceLabel">Notes</Label>
+        <Label Key="Draft">Draft</Label>
+        <Label Key="SubjectLabel">Subject:</Label>
+        <Label Key="SubjectNameLabel">Subject</Label>
+        <Label Key="CreatedLabel">Created</Label>
+        <Label Key="ViewLabel">View</Label>
+        <Label Key="FilterLabel">Filter</Label>
+        <Label Key="SortLabel">Sort</Label>
+        <Label Key="ChangeProjectLabel">Change Project</Label>
+        <Label Key="ChangeAppLabel">Change App</Label>
+        <Label Key="QuickCreateLabel">Quick Create</Label>
+        <Label Key="CopyLabel">Copy</Label>
+        <Label Key="QuickCloseoutLabel">Quick Closeout</Label>
+        <Label Key="OptionsLabel">Options</Label>
+        <Label Key="PackageNumberLabel">Package Number:</Label>
+        <Label Key="AssetLabel">Asset:</Label>
+        <Label Key="CSICodeLabel">CSI Code:</Label>
+        <Label Key="SummaryNameLabel">Summary</Label>
+        <Label Key="SummaryLabel">Summary:</Label>
+        <Label Key="NumberLabel">Number:</Label>
+        <Label Key="FieldSearchLabel">Search:</Label>
+      </Labels>
+    </Culture>
+  </Cultures>
+  <!-- ___________________________EntityDefs___________________________
+  EntityDefs define the structure of entities.
+  -->
+  <EntityDefs>
+    <EntityDef Name="QuickNote" Instance="1" ParentEntityDef="kahua_Core.kahua_Base" ParentEntityDefInstance="1" Description="[EntityDefQuickNoteDescription]" Label="[EntityDefQuickNoteLabel]" LabelAbbv="[EntityDefQuickNoteLabelAbbv]" LabelPlural="[EntityDefQuickNoteLabelPlural]" LabelAbbvPlural="[EntityDefQuickNoteLabelAbbvPlural]" IsAttachable="true" DefaultView="QuickNotePreview" IsConfigurable="True" DefaultEntityActionList="QuickNote.QuickNoteDefaultEntityActions">
+      <Attributes>
+        <Attribute Name="Number" DataType="AutoNumber" Description="[AttributeItemNumberDescription]" IsRequired="True" Label="[AttributeNumberLabel]" MaxLength="30" IsConfigurable="True" />
+        <Attribute Name="Summary" IsRequired="True" DataType="Text" Description="[SummaryLabel]" Label="[FieldSummaryLabel]" MaxLength="30" IsConfigurable="True" />
+        <Attribute Name="Note" DataType="Text" Description="[SummaryLabel]" Label="[FieldNoteLabel]" MaxLength="30" IsConfigurable="True" />
+        <Attribute Name="Attachments" DataType="File" Description="[NoteAttachmentsDescription]" Label="[FieldAttachmentsLabel]" Cardinality="OneToMany" />
+      </Attributes>
+    </EntityDef>
+  </EntityDefs>
+  <!-- Entity Views -->
+  <EntityViews>
+    <EntityView Name="Preview" View="QuickNote.QuickNotePreview" />
+    <EntityView Name="Edit" View="QuickNote.QuickNoteEditView" />
+  </EntityViews>
+  <!-- ___________________________ENTITY ACTIONS_______________________________________ -->
+  <EntityActions AppHostType="Default">
+    <EntityAction Name="Delete">
+      <MenuItem Label="[ActionDeleteLabel]">
+        <Action Ref="QuickNote.QuickNoteDeleteAction" />
+      </MenuItem>
+    </EntityAction>
+    <EntityAction Name="Edit">
+      <MenuItem Label="[ActionEditLabel]">
+        <Action Ref="QuickNote.QuickNoteEditSelect" />
+      </MenuItem>
+    </EntityAction>
+    <EntityAction Name="Preview">
+      <MenuItem Label="[ActionPreviewLabel]">
+        <Action Ref="QuickNote.QuickNotePreviewSelect" />
+      </MenuItem>
+    </EntityAction>
+    <!--<EntityAction Name="Send" Label="[ActionSendLabel]">
+      <Action Ref="QuickNote.QuickNoteSendAction" />
+    </EntityAction>-->
+  </EntityActions>
+  <EntityActionLists>
+    <EntityActionList Name="QuickNoteDefaultEntityActions">
+      <EntityActions>
+        <EntityAction Ref="Delete" />
+        <EntityAction Ref="Edit" />
+        <EntityAction Ref="Preview" />
+        <!--<EntityAction Ref="Send" />-->
+      </EntityActions>
+    </EntityActionList>
+  </EntityActionLists>
+  <!-- App Configurations -->
+  <AppConfiguration DisplayName="[NotesLabel]" ItemDisplayName="[NoteLabel]" DefaultDataView="All" DefaultView="QuickNote.QuickNoteListView" Menu="QuickNote.QuickNoteMenu">
+    <DataViewConfiguration>
+      <DataViews>
+        <DataView Name="All" Label="[DataViewAllLabel]" Type="Detail">
+          <DataSource Ref="QuickNote.QuickNoteListData" />
+          <Controls>
+            <Control Type="GridColumn" FieldType="Label" HeaderLabel="[FieldNumberLabel]" DataSourceField="QuickNote.Number" Sortable="True" />
+            <Control Type="GridColumn" FieldType="Label" HeaderLabel="[FieldSummaryLabel]" DataSourceField="QuickNote.Summary" Sortable="True" />
+            <Control Type="GridColumn" FieldType="Label" HeaderLabel="[FieldCreatedDateLabel]" DataSourceField="QuickNote.CreatedDate" Sortable="True" />
+            <Control Type="GridColumn" HeaderLabel="" DataSourceField="QuickNote.Attachments" Sortable="False" FieldType="Grid">
+              <Controls>
+                <Control Type="Image" FieldType="Image" Row="1" Column="1" VerticalAlignment="Center" ImageSourceUri="/appResource;name=kahua_FileManager.File_Icon">
+                  <VisibleWhen>
+                    <Expression Target="{Data.Entity.Attributes[QuickNote.Attachments].Data.Value.Files.Count}">
+                      <IsGreaterThan>0</IsGreaterThan>
+                    </Expression>
+                  </VisibleWhen>
+                </Control>
+              </Controls>
+            </Control>
+          </Controls>
+        </DataView>
+      </DataViews>
+    </DataViewConfiguration>
+    <AutoNumberConfigurations>
+      <AutoNumberConfiguration EntityDefName="QuickNote.QuickNote" EntityDefAttributeName="Number" Type="AutoSuggest" AllowDuplicates="True" Prefix="" Suffix="" Width="6" StartingNumber="1" />
+    </AutoNumberConfigurations>
+  </AppConfiguration>
+  <!-- 
+  ___________________________DataSources___________________________
+  
+  DataSources are used to request & save data to the platform.
+    
+  -->
+  <DataSources>
+    <DataSource Name="QuickNoteData" Permission="QuickNote.View" Access="Read|Write">
+      <Parameters>
+        <Parameter Value="" Name="Id" />
+      </Parameters>
+      <Select>
+        <Attribute Name="QuickNote.Id" />
+        <Attribute Name="QuickNote.CreatedDate" />
+        <Attribute Name="QuickNote.LastModifiedDate" />
+        <Attribute Name="QuickNote.Number" />
+        <Attribute Name="QuickNote.Summary" />
+        <Attribute Name="QuickNote.Note" />
+        <Attribute Name="QuickNote.Attachments" />
+        <Attribute Name="QuickNote.IsActive" />
+      </Select>
+      <From>
+        <Entity EntityDef="quickNote.QuickNote" Alias="QuickNote" />
+      </From>
+      <Where>
+        <Attribute Name="QuickNote.Id">
+          <Equals Parameter="Id" />
+        </Attribute>
+      </Where>
+    </DataSource>
+    <DataSource Name="QuickNoteListData" Page="1" PageSize="500" AutoUpdateMode="CurrentPartition" Permission="QuickNote.View">
+      <Select>
+        <Attribute Name="QuickNote.Id" />
+        <Attribute Name="QuickNote.CreatedDate" />
+        <Attribute Name="QuickNote.LastModifiedDate" />
+        <Attribute Name="QuickNote.Number" />
+        <Attribute Name="QuickNote.Summary" />
+        <Attribute Name="QuickNote.Note" />
+        <Attribute Name="QuickNote.Attachments" />
+      </Select>
+      <From>
+        <Entity EntityDef="quickNote.QuickNote" Alias="QuickNote" />
+      </From>
+      <Order>
+        <Attribute Direction="DESC" Name="QuickNote.Number" />
+      </Order>
+    </DataSource>
+  </DataSources>
+  <!--
+		___________________________MENUS________________________________________
+    
+    Menus defines available menus for the app.  The types of menus and where they apear is governed by the app host consuming them.
+	-->
+  <Menus>
+    <Menu Name="NotesMainMenu" AppHostType="Kahua.Silverlight" ParentMenu="kahua_Domain.MainMenu">
+      <MenuItems>
+        <MenuItem Name="QuickNote" Label="[NotesLabel]" Image="/kahua.Apps.Public.SL.Host;component/Images/Modules/icon_Documents.png">
+          <Action Scope="Shell" TargetType="Shell" Target="" Operation="OpenApp" Parameters="AppName=QuickNote" />
+        </MenuItem>
+      </MenuItems>
+    </Menu>
+    <Menu Name="NotesMainMenu" AppHostType="Kahua.Mobile" ParentMenu="kahua_Domain.MainMenu">
+      <MenuItems>
+        <MenuItem Name="OpenApp" Label="[NotesLabel]" Image="/kahua.Apps.Public.SL.Host;component/Images/Modules/icon_Documents.png">
+          <Action Scope="Shell" TargetType="Shell" Target="" Operation="OpenApp" Parameters="AppName=QuickNote" />
+        </MenuItem>
+      </MenuItems>
+    </Menu>
+    <Menu Name="QuickNoteMenu" EntityActionListName="QuickNoteDefaultEntityActions">
+      <MenuItems>
+        <MenuItem Name="CreateQuickNote" Label="[CreateLabel]" Action="QuickNote.QuickNoteCreateAction" />
+        <MenuItem Type="EntityActions" />
+      </MenuItems>
+    </Menu>
+    <Menu Name="QuickNoteMenu" AppHostType="Kahua.Mobile" EntityActionListName="QuickNoteDefaultEntityActions">
+      <MenuItems>
+        <MenuItem Type="Group">
+          <MenuItems>
+            <MenuItem Name="CreateQuickNote" Label="[CreateLabel]" Image="/hostResource;menu_edit">
+              <Action Scope="App" TargetType="View" Target="QuickNote.QuickNoteEditView" Operation="Open" Parameters="Region=Detail" />
+            </MenuItem>
+            <MenuItem Type="EntityActions" />
+            <MenuItem Name="Refresh" Label="[RefreshLabel]" Image="/hostResource;menu_refresh">
+              <Action Scope="App" TargetType="DataSource" Operation="Refresh" Target="QuickNote.QuickNoteListData" />
+            </MenuItem>
+          </MenuItems>
+        </MenuItem>
+      </MenuItems>
+    </Menu>
+    <Menu Name="EntityActionsMenu">
+      <MenuItems>
+        <MenuItem Type="EntityActions" />
+      </MenuItems>
+    </Menu>
+    <Menu Name="DetailViewMenu" AppHostType="Kahua.Mobile">
+      <MenuItems>
+        <MenuItem Type="Group">
+          <MenuItems>
+            <MenuItem Name="AddPhoto" Image="/hostResource;menu_camera" Label="[AddPhotoLabel]">
+              <Action Scope="View" TargetType="Control" Operation="AddFile" Target="{View.AllControls[QuickNoteFiles]}" Parameters="Format=Camera" />
+            </MenuItem>
+          </MenuItems>
+        </MenuItem>
+      </MenuItems>
+    </Menu>
+  </Menus>
+  <!--
+		  ________________________________EVENTS________________________________________
+    
+      Events are additional actions to perform when a specified action has completed
+	-->
+  <Events>
+    <Event Name="QuickNoteSaveEvent" AppHostType="Kahua.Silverlight" SourceAction="QuickNote.QuickNoteSaveAction">
+      <TargetActions>
+        <TargetAction>
+          <Action Ref="QuickNote.QuickNoteCloseEditViewAction" Scope="App" />
+        </TargetAction>
+        <TargetAction>
+          <Action Ref="QuickNote.QuickNoteListViewRefreshAction" Scope="App" />
+        </TargetAction>
+        <TargetAction>
+          <Action Ref="QuickNote.QuickNotePreviewSelect" Scope="App" />
+        </TargetAction>
+      </TargetActions>
+    </Event>
+    <Event Name="QuickNoteSaveEvent" AppHostType="Kahua.Mobile" SourceAction="QuickNote.QuickNoteSaveAction">
+      <TargetActions>
+        <TargetAction>
+          <Action Scope="App" TargetType="View" Operation="Close" Target="{Source.Target.View}" />
+        </TargetAction>
+        <TargetAction>
+          <Action Ref="QuickNote.QuickNoteListViewRefreshAction" Scope="App" />
+        </TargetAction>
+        <TargetAction>
+          <Action Ref="QuickNote.QuickNotePreviewSelect" Scope="App" Parameters="EntityView=QuickNote.Preview;Region=Detail;EntityId={Source.Result.Key.Id};EntityPartitionId={Source.Result.Key.PartitionId};EntityDefName={Source.Result.EntityDef}" />
+        </TargetAction>
+      </TargetActions>
+    </Event>
+    <Event Name="QuickNoteDeleteEvent" SourceAction="QuickNote.QuickNoteDeleteAction">
+      <TargetActions>
+        <TargetAction>
+          <Action Ref="QuickNote.QuickNoteClosePreviewAction" Scope="App" />
+        </TargetAction>
+        <TargetAction>
+          <Action Ref="QuickNote.QuickNoteListViewRefreshAction" Scope="App" />
+        </TargetAction>
+      </TargetActions>
+    </Event>
+  </Events>
+  <!--
+		___________________________VIEWS________________________________________
+    
+    Views are visual representations of the data within Kahua.
+    
+	-->
+  <Views>
+    <!--Previews-->
+    <View Name="QuickNotePreview" Label="[QuickNotePreviewLabel]" IsCloseable="true">
+      <LoadActions>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteData" Operation="Get" Parameters="Id={View.Parameters[EntityId]}" />
+          <Where>
+            <Expression Target="{View.Parameters[EntityId]}">
+              <IsGreaterThan>0</IsGreaterThan>
+            </Expression>
+          </Where>
+        </LoadAction>
+      </LoadActions>
+      <Controls>
+        <Control Type="Grid">
+          <Controls>
+            <Control Type="Grid" Row="1" Column="1" VerticalAlignment="Stretch">
+              <Controls>
+                <Control Type="AnchorPanel">
+                  <Controls>
+                    <Control Type="AnchorSection" Label="[AnchorSectionDetailsLabel]" HideHeader="false" IsCollapsable="true">
+                      <Controls>
+                        <Control Type="Grid">
+                          <Controls>
+                            <Control Type="Field" Row="1" Column="1" FieldType="Label" Value="[FieldNumberLabel]" Margin="5" Width="175" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <Control Type="Field" Row="1" Column="2" FieldType="Label" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Number" IsEditable="true" HorizontalAlignment="Stretch" />
+                            <Control Type="Field" Row="2" Column="1" FieldType="Label" Value="[FieldSummaryLabel]" Margin="5 6 0 0" Width="175" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <Control Type="Field" Row="2" Column="2" FieldType="Label" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Summary" IsEditable="true" IsMultiLine="True" HorizontalAlignment="Stretch" />
+                            <Control Type="Field" Row="3" Column="1" FieldType="Label" Value="[FieldNoteLabel]" Margin="5 6 0 0" Width="175" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <Control Type="Field" Row="3" Column="2" FieldType="Label" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Note" IsEditable="true" IsMultiLine="True" HorizontalAlignment="Stretch" />
+                          </Controls>
+                        </Control>
+                      </Controls>
+                    </Control>
+                    <Control Type="AnchorSection" Label="[AnchorSectionAttachmentsLabel]" Row="2" Column="1" IsCollapsable="true" LabelSuffixDataSource="QuickNote.QuickNoteData" LabelSuffixDataSourceField="QuickNote.Attachments.Count" LabelSuffixFormat=" ({0})" Name="AttachmentsSection">
+                      <Header>
+                        <Controls>
+                          <Control Type="Action" Row="1" Column="1" FieldType="Link" Label="[AddAttachmentsLabel]" Name="AttachmentsAddButton" VerticalAlignment="Center">
+                            <Action Ref="QuickNote.QuickNoteAddAttachmentsAction" Parameters="EntityId={Id}" Scope="View" />
+                          </Control>
+                        </Controls>
+                      </Header>
+                      <Controls>
+                        <Control Type="Field" Row="1" Column="1" Name="QuickNoteAttachmentsUploader" FieldType="File" AutoSave="True" FileType="Attachment" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Attachments" Margin="5" />
+                      </Controls>
+                    </Control>
+                    <Control Type="AnchorSection" Label="[AnchorSectionHistoryLabel]" Row="3" Column="1" IsCollapsable="true">
+                      <Controls>
+                        <Control Type="Feature" Row="1" Column="1" ViewName="kahua_EntityHistoryView" ViewLabel="[AnchorSectionHistoryLabel]" ViewType="Static" ViewClass="kahua.hosts.silverlight.feature;kahua.hosts.silverlight.feature.history.HistoryView" ModelClass="kahua.hosts.silverlight.feature;kahua.hosts.silverlight.feature.history.HistoryViewModel" DataSource="QuickNote.QuickNoteData" />
+                      </Controls>
+                    </Control>
+                  </Controls>
+                </Control>
+              </Controls>
+            </Control>
+            <Control Type="Grid" Row="2" Column="1" ColumnSpan="2" VerticalAlignment="Bottom">
+              <Controls>
+                <Control Type="Action" Row="1" Column="1" Label="[ActionEditLabel]" Width="100" HorizontalAlignment="Center" Margin="5" DataSource="QuickNote.QuickNoteData">
+                  <Action Ref="QuickNote.QuickNoteEditSelect" Parameters="EntityView=QuickNote.Edit;Region=Detail;EntityId={View.Parameters[EntityId]};EntityPartitionId={View.Parameters[EntityPartitionId]};EntityDefName={View.Parameters[EntityDefName]}" />
+                  <VisibleWhen>
+                    <Attribute Name="QuickNote.IsActive">
+                      <Equals>True</Equals>
+                    </Attribute>
+                  </VisibleWhen>
+                </Control>
+                <Control Type="Action" Row="1" Column="2" Label="[ActionSaveLabel]" MinWidth="100" HorizontalAlignment="Center" Margin="5" DataSource="QuickNote.QuickNoteData">
+                  <Action Ref="QuickNote.QuickNoteSaveAction" Scope="View" />
+                  <VisibleWhen>
+                    <Expression Target="{View.IsDirty}">
+                      <Equals>True</Equals>
+                    </Expression>
+                    <And>
+                      <Expression Target="{View.Parameters[EntityId]}">
+                        <IsNotNull />
+                      </Expression>
+                    </And>
+                  </VisibleWhen>
+                </Control>
+                <Control Type="Action" Row="1" Column="3" Label="[ActionDeleteLabel]" Width="100" HorizontalAlignment="Center" Margin="5" DataSource="QuickNote.QuickNoteData">
+                  <Action Ref="QuickNote.QuickNoteDeleteAction" Parameters="EntityId={View.Parameters[EntityId]}" />
+                  <VisibleWhen>
+                    <Attribute Name="QuickNote.IsActive">
+                      <Equals>True</Equals>
+                    </Attribute>
+                  </VisibleWhen>
+                </Control>
+              </Controls>
+            </Control>
+          </Controls>
+        </Control>
+      </Controls>
+    </View>
+    <View Name="QuickNotePreview" Label="[QuickNotePreviewLabel]" AppHostType="Kahua.Mobile" Menu="QuickNote.DetailViewMenu">
+      <LoadActions>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteData" Operation="Get" Parameters="Id={View.Parameters[EntityId]}" />
+          <Where>
+            <Expression Target="{View.Parameters[EntityId]}">
+              <IsGreaterThan>0</IsGreaterThan>
+            </Expression>
+          </Where>
+        </LoadAction>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteData" Operation="LoadDefaults" />
+          <Where>
+            <Expression Target="{View.Parameters[EntityId]}">
+              <IsNull />
+            </Expression>
+          </Where>
+        </LoadAction>
+      </LoadActions>
+      <Controls>
+        <Control Type="Grid">
+          <Controls>
+            <Control Type="Grid" StretchedColumnNumber="2" Scroll="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+              <Controls>
+                <Control Type="Field" Row="1" Column="1" FieldType="Label" Value="[FieldNumberLabel]" Margin="5" Width="175" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Control Type="Field" Row="1" Column="2" FieldType="Label" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Number" IsEditable="true" HorizontalAlignment="Stretch" />
+                <Control Type="Field" Row="2" Column="1" FieldType="Label" Value="[FieldSummaryLabel]" Margin="5" Width="175" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Control Type="Field" Row="2" Column="2" FieldType="Label" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Summary" IsEditable="true" HorizontalAlignment="Stretch" />
+                <Control Type="Field" Row="3" Column="1" FieldType="Label" Value="[FieldNoteLabel]" Margin="5" Width="175" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Control Type="Field" Row="3" Column="2" FieldType="Label" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Note" IsEditable="true" HorizontalAlignment="Stretch" />
+                <Control Type="Grid" Row="4" Column="1" ColumnSpan="2" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                  <Controls>
+                    <Control Type="Field" Row="1" Column="1" FieldType="Label" Value="[AttachmentsLabel]" Width="200" />
+                    <Control Type="Field" Row="2" Column="1" Name="QuickNoteFiles" FieldType="File" AutoSave="False" IsEditable="True" FileType="Attachment" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Attachments" Margin="5" />
+                  </Controls>
+                </Control>
+              </Controls>
+            </Control>
+            <!--Action buttons-->
+            <Control Type="Grid" Row="2" Column="1" HorizontalAlignment="Left">
+              <Controls>
+                <Control Type="Action" Row="1" Column="1" Label="[ActionEditLabel]" HorizontalAlignment="Left" DataSource="QuickNote.QuickNoteData">
+                  <Action Ref="QuickNote.QuickNoteEditSelect" Parameters="EntityView=QuickNote.Edit;Region=Detail;EntityId={View.Parameters[EntityId]};EntityPartitionId={View.Parameters[EntityPartitionId]};EntityDefName={View.Parameters[EntityDefName]}" />
+                  <VisibleWhen>
+                    <Attribute Name="QuickNote.IsActive">
+                      <Equals>True</Equals>
+                    </Attribute>
+                  </VisibleWhen>
+                </Control>
+                <Control Type="Action" Row="1" Column="2" Label="[ActionSaveLabel]" HorizontalAlignment="Left" Margin="5 0 0 0" DataSource="QuickNote.QuickNoteData">
+                  <Action Ref="QuickNote.QuickNoteSaveAction" Scope="View" />
+                  <VisibleWhen>
+                    <Expression Target="{View.IsDirty}">
+                      <Equals>True</Equals>
+                    </Expression>
+                    <And>
+                      <Expression Target="{View.Parameters[EntityId]}">
+                        <IsNotNull />
+                      </Expression>
+                    </And>
+                  </VisibleWhen>
+                </Control>
+                <Control Type="Action" Row="1" Column="3" Label="[ActionDeleteLabel]" HorizontalAlignment="Left" Margin="5 0 0 0" DataSource="QuickNote.QuickNoteData">
+                  <Action Ref="QuickNote.QuickNoteDeleteAction" Scope="View" Parameters="EntityId={View.Parameters[EntityId]}" />
+                  <VisibleWhen>
+                    <Attribute Name="QuickNote.IsActive">
+                      <Equals>True</Equals>
+                    </Attribute>
+                  </VisibleWhen>
+                </Control>
+              </Controls>
+            </Control>
+          </Controls>
+        </Control>
+      </Controls>
+    </View>
+    <!-- Default QuickNoteListView -->
+    <View Name="QuickNoteListView" Label="[QuickNoteListViewLabel]" ConfigurationEnabled="True" ShowCurrentListInTitle="True" RefreshAction="QuickNote.QuickNoteListRefreshAction">
+      <LoadActions>
+        <LoadAction>
+          <Action Scope="View" TargetType="Control" Target="QuickNoteDataViewControl" Operation="Get" />
+        </LoadAction>
+      </LoadActions>
+      <Controls>
+        <Control Type="DataView" Name="QuickNoteDataViewControl" DataView="QuickNote.All" SelectAction="QuickNote.QuickNotePreviewSelect">
+          <Menu Ref="QuickNote.QuickNoteMenu" EntityActionListName="QuickNoteDefaultEntityActions" />
+        </Control>
+      </Controls>
+    </View>
+    <!-- Droid QuickNoteListView -->
+    <View Name="QuickNoteListView" Label="[QuickNoteListViewLabel]" AppHostType="Kahua.Mobile" RefreshAction="QuickNote.QuickNoteListRefreshAction" IsProtected="false">
+      <LoadActions>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteListData" Operation="Get" />
+        </LoadAction>
+      </LoadActions>
+      <Controls>
+        <Control Type="DataGrid" Row="1" Column="1" Name="QuickNoteListGrid" DataSource="QuickNote.QuickNoteListData" HorizontalAlignment="Stretch">
+          <SelectAction Ref="QuickNote.QuickNotePreviewSelect" Scope="App" TargetType="View" Operation="Open" Target="PlatformSelect" Parameters="EntityView=QuickNote.Preview;Region=Detail;EntityId={Source.Key.Id};EntityPartitionId={Source.Key.PartitionId};EntityDefName={Source.EntityDef}" />
+          <Controls>
+            <!-- List item definition -->
+            <Control Type="GridColumn" FieldType="Grid" HorizontalAlignment="Stretch">
+              <Controls>
+                <Control Row="1" Column="1" ColumnSpan="4" Type="Field" FieldType="Label" DataSourceField="QuickNote.Summary" HorizontalAlignment="Stretch">
+                  <Style>
+                    <Font IsBold="True" />
+                    <VisibleWhen />
+                  </Style>
+                </Control>
+                <Control Row="2" Column="1" Type="Field" FieldType="Label" DataSourceField="QuickNote.Number" />
+                <Control Row="2" Column="2" Type="Field" FieldType="Label" Value="[FieldCreatedDateLabel]: " />
+                <Control Row="2" Column="3" Type="Field" FieldType="Label" DataSourceField="QuickNote.CreatedDate" HorizontalAlignment="Left" />
+              </Controls>
+            </Control>
+          </Controls>
+        </Control>
+      </Controls>
+    </View>
+    <!-- Default Edit -->
+    <View Name="QuickNoteEditView" Label="[QuickNoteEditLabel]" IsCloseable="True">
+      <LoadActions>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteData" Operation="Get" Parameters="Id={View.Parameters[EntityId]}" />
+          <Where>
+            <Expression Target="{View.Parameters[EntityId]}">
+              <IsGreaterThan>0</IsGreaterThan>
+            </Expression>
+          </Where>
+        </LoadAction>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteData" Operation="LoadDefaults" />
+          <Where>
+            <Expression Target="{View.Parameters[EntityId]}">
+              <IsNull />
+            </Expression>
+          </Where>
+        </LoadAction>
+      </LoadActions>
+      <Controls>
+        <Control Type="Grid">
+          <Controls>
+            <Control Type="Grid" Row="1" Column="1" VerticalAlignment="Stretch">
+              <Controls>
+                <Control Type="AnchorPanel">
+                  <Controls>
+                    <Control Type="AnchorSection" Label="[AnchorSectionDetailsLabel]" Row="1" Column="1" HideHeader="false" IsCollapsable="true">
+                      <Controls>
+                        <Control Type="Grid">
+                          <Controls>
+                            <Control Type="Field" Row="1" Column="1" FieldType="Label" Value="[FieldNumberLabel]" Margin="5" Width="175" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <Control Type="Field" Row="1" Column="2" FieldType="AutoNumber" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Number" IsEditable="true" Width="200" HorizontalAlignment="Left" />
+                            <Control Type="Field" Row="2" Column="1" FieldType="Label" Value="[FieldSummaryLabel]" Margin="5" Width="175" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <Control Type="Field" Row="2" Column="2" FieldType="Text" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Summary" IsEditable="true" Width="400" />
+                            <Control Type="Field" Row="3" Column="1" FieldType="Label" Value="[FieldNoteLabel]" Margin="5 6 0 0" Width="175" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                            <Control Type="Field" Row="3" Column="2" FieldType="Text" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Note" IsEditable="true" Height="115" IsMultiLine="True" />
+                          </Controls>
+                        </Control>
+                      </Controls>
+                    </Control>
+                    <Control Type="AnchorSection" Label="[AnchorSectionAttachmentsLabel]" Row="2" Column="1" IsCollapsable="true" LabelSuffixDataSource="QuickNote.QuickNoteData" LabelSuffixDataSourceField="QuickNote.Attachments.Count" LabelSuffixFormat=" ({0})" Name="AttachmentsSection">
+                      <Header>
+                        <Controls>
+                          <Control Type="Action" Row="1" Column="1" FieldType="Link" Label="[AddAttachmentsLabel]" Name="AttachmentsAddButton" VerticalAlignment="Center">
+                            <Action Ref="QuickNote.QuickNoteEditAddAttachmentsAction" Parameters="EntityId={Id}" Scope="View" />
+                          </Control>
+                        </Controls>
+                      </Header>
+                      <Controls>
+                        <Control Type="Field" Row="1" Column="1" Name="QuickNoteEditAttachmentsUploader" FieldType="File" AutoSave="False" IsEditable="True" FileType="Attachment" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Attachments" Margin="5" />
+                      </Controls>
+                    </Control>
+                    <Control Type="AnchorSection" Label="[AnchorSectionHistoryLabel]" Row="3" Column="1" IsCollapsable="true">
+                      <Controls>
+                        <Control Type="Feature" Row="1" Column="1" ViewName="kahua_EntityHistoryView" ViewLabel="[AnchorSectionHistoryLabel]" ViewType="Static" ViewClass="kahua.hosts.silverlight.feature;kahua.hosts.silverlight.feature.history.HistoryView" ModelClass="kahua.hosts.silverlight.feature;kahua.hosts.silverlight.feature.history.HistoryViewModel" DataSource="QuickNote.QuickNoteData" />
+                      </Controls>
+                    </Control>
+                  </Controls>
+                </Control>
+              </Controls>
+            </Control>
+            <Control Type="Grid" Row="2" Column="1" VerticalAlignment="Bottom">
+              <Controls>
+                <Control Type="Action" Row="1" Column="1" Label="[ActionSaveLabel]" Width="100" HorizontalAlignment="Center">
+                  <Action Ref="QuickNote.QuickNoteSaveAction" Scope="View" />
+                  <EnabledWhen>
+                    <Expression Target="{View.IsDirty}">
+                      <Equals>True</Equals>
+                    </Expression>
+                    <Or>
+                      <Expression Target="{View.Parameters[EntityId]}">
+                        <IsNull />
+                      </Expression>
+                    </Or>
+                  </EnabledWhen>
+                </Control>
+              </Controls>
+            </Control>
+          </Controls>
+        </Control>
+      </Controls>
+    </View>
+    <View Name="QuickNoteEditView" Label="[QuickNoteEditLabel]" AppHostType="Kahua.Mobile" Menu="QuickNote.DetailViewMenu">
+      <LoadActions>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteData" Operation="Get" Parameters="Id={View.Parameters[EntityId]}" />
+          <Where>
+            <Expression Target="{View.Parameters[EntityId]}">
+              <IsGreaterThan>0</IsGreaterThan>
+            </Expression>
+          </Where>
+        </LoadAction>
+        <LoadAction>
+          <Action Scope="View" TargetType="DataSource" Target="QuickNote.QuickNoteData" Operation="LoadDefaults" />
+          <Where>
+            <Expression Target="{View.Parameters[EntityId]}">
+              <IsNull />
+            </Expression>
+          </Where>
+        </LoadAction>
+      </LoadActions>
+      <Controls>
+        <Control Type="Grid">
+          <Controls>
+            <Control Type="Grid" StretchedColumnNumber="2" Scroll="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+              <Controls>
+                <Control Type="Field" Row="1" Column="1" FieldType="Label" Value="[FieldNumberLabel]" Margin="5" Width="175" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <Control Type="Field" Row="1" Column="2" FieldType="Text" Margin="5" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Number" IsEditable="true" HorizontalAlignment="Stretch" />
+                <Control Type="Field" Row="2" Column="1" FieldType="Label" Value="[FieldSummaryLabel]" Margin="5" Width="175" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Control Type="Field" Row="2" Column="2" FieldType="Text" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Summary" Margin="5" HorizontalAlignment="Stretch" />
+                <Control Type="Field" Row="3" Column="1" FieldType="Label" Value="[FieldNoteLabel]" Margin="5" Width="175" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Control Type="Field" Row="3" Column="2" FieldType="Text" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Note" IsEditable="True" Margin="5" HorizontalAlignment="Stretch" IsMultiLine="True" Height="200" />
+                <Control Type="Grid" Row="4" Column="1" ColumnSpan="2" Margin="5" HorizontalAlignment="Left">
+                  <Controls>
+                    <Control Type="Field" Row="1" Column="1" FieldType="Label" Value="[AttachmentsLabel]" Width="200" />
+                    <Control Type="Field" Row="2" Column="1" Name="QuickNoteFiles" FieldType="File" AutoSave="False" IsEditable="True" FileType="Attachment" DataSource="QuickNote.QuickNoteData" DataSourceField="QuickNote.Attachments" Margin="5" />
+                  </Controls>
+                </Control>
+              </Controls>
+            </Control>
+            <!--Action buttons-->
+            <Control Type="Grid" Row="2" Column="1" HorizontalAlignment="Left">
+              <Controls>
+                <Control Type="Action" Row="1" Column="1" Label="[ActionSaveLabel]" HorizontalAlignment="Left">
+                  <Action Ref="QuickNote.QuickNoteSaveAction" />
+                </Control>
+              </Controls>
+            </Control>
+          </Controls>
+        </Control>
+      </Controls>
+    </View>
+  </Views>
+</App>
